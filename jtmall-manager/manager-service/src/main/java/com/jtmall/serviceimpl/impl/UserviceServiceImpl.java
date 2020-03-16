@@ -1,9 +1,9 @@
 package com.jtmall.serviceimpl.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.jtmall.entity.User;
-import com.jtmall.serviceimpl.mapper.UserMapper;
-import com.jtmall.service.UserviceService;
+import com.jtmall.service.UserService;
+import com.jtmall.serviceimpl.mapper.JtbItemMapper;
+import com.jtmall.serviceimpl.mapper.JtbItemcontentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -14,15 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Opinion
  */
 @Service(version = "${demo.service.version}")
-public class UserviceServiceImpl implements UserviceService {
+public class UserviceServiceImpl  implements UserService {
 
     @Autowired
-    UserMapper userMapper;
+    JtbItemMapper jtbItemMapper;
+    @Autowired
+    JtbItemcontentMapper jtbItemcontentMapper;
 
     @Override
-    public User getUserByid() {
-        User user=new User();
-        user.setUsername(userMapper.getUser());
-        return user;
+    public void testRedis() {
+        System.out.println("调用了User");
     }
 }

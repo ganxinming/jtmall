@@ -13,8 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableDubbo
 @SpringBootApplication
 public class JtmallManagerWebApplication {
-
     public static void main(String[] args) {
+
         SpringApplication.run(JtmallManagerWebApplication.class, args);
     }
 }

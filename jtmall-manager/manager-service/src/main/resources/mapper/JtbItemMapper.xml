@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jtmall.serviceimpl.mapper.JtbItemMapper">
+  <resultMap id="BaseResultMap" type="com.jtmall.entity.JtbItem">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="lititle" jdbcType="VARCHAR" property="lititle" />
+    <result column="c_number" jdbcType="INTEGER" property="cNumber" />
+    <result column="place" jdbcType="VARCHAR" property="place" />
+    <result column="quality" jdbcType="CHAR" property="quality" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+    <result column="weight" jdbcType="REAL" property="weight" />
+    <result column="unit" jdbcType="CHAR" property="unit" />
+    <result column="price" jdbcType="REAL" property="price" />
+    <result column="orign_price" jdbcType="REAL" property="orignPrice" />
+    <result column="key_word" jdbcType="VARCHAR" property="keyWord" />
+    <result column="audit_state" jdbcType="VARCHAR" property="auditState" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, title, lititle, c_number, place, quality, brand, weight, unit, price, orign_price, 
+    key_word, audit_state, state
+  </sql>
+  <select id="selectByExample" parameterType="com.jtmall.entity.JtbItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jtb_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jtb_item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jtb_item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jtmall.entity.JtbItemExample">
+    delete from jtb_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jtmall.entity.JtbItem">
+    insert into jtb_item (id, title, lititle, 
+      c_number, place, quality, 
+      brand, weight, unit, price, 
+      orign_price, key_word, audit_state, 
+      state)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{lititle,jdbcType=VARCHAR}, 
+      #{cNumber,jdbcType=INTEGER}, #{place,jdbcType=VARCHAR}, #{quality,jdbcType=CHAR}, 
+      #{brand,jdbcType=VARCHAR}, #{weight,jdbcType=REAL}, #{unit,jdbcType=CHAR}, #{price,jdbcType=REAL}, 
+      #{orignPrice,jdbcType=REAL}, #{keyWord,jdbcType=VARCHAR}, #{auditState,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jtmall.entity.JtbItem">
+    insert into jtb_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="lititle != null">
+        lititle,
+      </if>
+      <if test="cNumber != null">
+        c_number,
+      </if>
+      <if test="place != null">
+        place,
+      </if>
+      <if test="quality != null">
+        quality,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="orignPrice != null">
+        orign_price,
+      </if>
+      <if test="keyWord != null">
+        key_word,
+      </if>
+      <if test="auditState != null">
+        audit_state,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="lititle != null">
+        #{lititle,jdbcType=VARCHAR},
+      </if>
+      <if test="cNumber != null">
+        #{cNumber,jdbcType=INTEGER},
+      </if>
+      <if test="place != null">
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="quality != null">
+        #{quality,jdbcType=CHAR},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=REAL},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=CHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="orignPrice != null">
+        #{orignPrice,jdbcType=REAL},
+      </if>
+      <if test="keyWord != null">
+        #{keyWord,jdbcType=VARCHAR},
+      </if>
+      <if test="auditState != null">
+        #{auditState,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jtmall.entity.JtbItemExample" resultType="java.lang.Long">
+    select count(*) from jtb_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update jtb_item
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lititle != null">
+        lititle = #{record.lititle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cNumber != null">
+        c_number = #{record.cNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.place != null">
+        place = #{record.place,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quality != null">
+        quality = #{record.quality,jdbcType=CHAR},
+      </if>
+      <if test="record.brand != null">
+        brand = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weight != null">
+        weight = #{record.weight,jdbcType=REAL},
+      </if>
+      <if test="record.unit != null">
+        unit = #{record.unit,jdbcType=CHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=REAL},
+      </if>
+      <if test="record.orignPrice != null">
+        orign_price = #{record.orignPrice,jdbcType=REAL},
+      </if>
+      <if test="record.keyWord != null">
+        key_word = #{record.keyWord,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditState != null">
+        audit_state = #{record.auditState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update jtb_item
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      lititle = #{record.lititle,jdbcType=VARCHAR},
+      c_number = #{record.cNumber,jdbcType=INTEGER},
+      place = #{record.place,jdbcType=VARCHAR},
+      quality = #{record.quality,jdbcType=CHAR},
+      brand = #{record.brand,jdbcType=VARCHAR},
+      weight = #{record.weight,jdbcType=REAL},
+      unit = #{record.unit,jdbcType=CHAR},
+      price = #{record.price,jdbcType=REAL},
+      orign_price = #{record.orignPrice,jdbcType=REAL},
+      key_word = #{record.keyWord,jdbcType=VARCHAR},
+      audit_state = #{record.auditState,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jtmall.entity.JtbItem">
+    update jtb_item
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="lititle != null">
+        lititle = #{lititle,jdbcType=VARCHAR},
+      </if>
+      <if test="cNumber != null">
+        c_number = #{cNumber,jdbcType=INTEGER},
+      </if>
+      <if test="place != null">
+        place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="quality != null">
+        quality = #{quality,jdbcType=CHAR},
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=REAL},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=CHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="orignPrice != null">
+        orign_price = #{orignPrice,jdbcType=REAL},
+      </if>
+      <if test="keyWord != null">
+        key_word = #{keyWord,jdbcType=VARCHAR},
+      </if>
+      <if test="auditState != null">
+        audit_state = #{auditState,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jtmall.entity.JtbItem">
+    update jtb_item
+    set title = #{title,jdbcType=VARCHAR},
+      lititle = #{lititle,jdbcType=VARCHAR},
+      c_number = #{cNumber,jdbcType=INTEGER},
+      place = #{place,jdbcType=VARCHAR},
+      quality = #{quality,jdbcType=CHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=REAL},
+      unit = #{unit,jdbcType=CHAR},
+      price = #{price,jdbcType=REAL},
+      orign_price = #{orignPrice,jdbcType=REAL},
+      key_word = #{keyWord,jdbcType=VARCHAR},
+      audit_state = #{auditState,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

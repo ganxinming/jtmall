@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jtmall.serviceimpl.mapper.JtbItemAndContentMapper">
+
+    <resultMap id="JtbItemAndcontentResult" type="com.jtmall.entity.JtbItemAndcontent">
+        <result property="id" column="id"></result>
+        <result property="title" column="title"></result>
+        <result property="lititle" column="lititle"></result>
+        <result property="cNumber" column="c_number"></result>
+        <result property="place" column="place"></result>
+        <result property="quality" column="quality"></result>
+        <result property="brand" column="brand"></result>
+        <result property="weight" column="weight"></result>
+        <result property="unit" column="unit"></result>
+        <result property="price" column="price"></result>
+        <result property="orignPrice" column="orign_price"></result>
+        <result property="auditState" column="audit_state"></result>
+        <result property="state" column="state"></result>
+        <result property="simpleContent" column="simple_content"></result>
+        <result property="image" column="image"></result>
+        <result property="created" column="created"></result>
+    </resultMap>
+    <select id="getAllJtbItemAndContent" resultMap="JtbItemAndcontentResult">
+        select * from jtb_item left join jtb_itemcontent
+            on jtb_item.c_number=jtb_itemcontent.id
+    </select>
+
+    <select id="getJtbItemAndContentByid" resultMap="JtbItemAndcontentResult" parameterType="int">
+        select * from jtb_item left join jtb_itemcontent
+            on jtb_item.c_number=jtb_itemcontent.id
+            where jtb_itemcontent.id=#{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layer-更懂你的web弹窗解决方案</title>
+  <script src="../static/../static/js/jquery-1.9.1.min.js"></script>
+  <script src="../static/layer/layer.js"></script>
+</head>
+<body>
+
+
+<div class="box" style="text-align:center">
+  编号:<input type="text" id="card">
+  <button id="apload">apload</button>
+</div>
+
+<script>
+
+
+//页面一打开就执行，放入ready是为了layer所需配件（css、扩展模块）加载完毕
+
+$('#apload').on('click', function(){
+  var card=$("#card").val();
+  if (card == "" || card == null){
+    layer.tips('请填写编号', '#about', {tips: 1})
+  }
+  else{
+    layer.open({
+      type: 2,
+      title: '欢迎页',
+      maxmin: true,
+      area: ['800px', '500px'],
+      content: 'http://localhost:9091/hello/'+card.toString(),
+      end: function(){
+        layer.tips('Hi', '#about', {tips: 1})
+      }
+    });
+  }
+
+    });
+</script>
+</body>
+</html>

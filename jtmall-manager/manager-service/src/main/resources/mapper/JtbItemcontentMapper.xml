@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jtmall.serviceimpl.mapper.JtbItemcontentMapper">
+  <resultMap id="BaseResultMap" type="com.jtmall.entity.JtbItemcontent">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="simple_content" jdbcType="VARCHAR" property="simpleContent" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="created" jdbcType="VARCHAR" property="created" />
+    <result column="updated" jdbcType="VARCHAR" property="updated" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.jtmall.entity.JtbItemcontent">
+    <result column="editor_value" jdbcType="LONGVARCHAR" property="editorValue" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, simple_content, image, created, updated
+  </sql>
+  <sql id="Blob_Column_List">
+    editor_value
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.jtmall.entity.JtbItemcontentExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from jtb_itemcontent
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.jtmall.entity.JtbItemcontentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jtb_itemcontent
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from jtb_itemcontent
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jtb_itemcontent
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jtmall.entity.JtbItemcontentExample">
+    delete from jtb_itemcontent
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jtmall.entity.JtbItemcontent">
+    insert into jtb_itemcontent (id, simple_content, image, 
+      created, updated, editor_value
+      )
+    values (#{id,jdbcType=INTEGER}, #{simpleContent,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{created,jdbcType=VARCHAR}, #{updated,jdbcType=VARCHAR}, #{editorValue,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jtmall.entity.JtbItemcontent">
+    insert into jtb_itemcontent
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="simpleContent != null">
+        simple_content,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="updated != null">
+        updated,
+      </if>
+      <if test="editorValue != null">
+        editor_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="simpleContent != null">
+        #{simpleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=VARCHAR},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=VARCHAR},
+      </if>
+      <if test="editorValue != null">
+        #{editorValue,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jtmall.entity.JtbItemcontentExample" resultType="java.lang.Long">
+    select count(*) from jtb_itemcontent
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update jtb_itemcontent
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.simpleContent != null">
+        simple_content = #{record.simpleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null">
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.created != null">
+        created = #{record.created,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updated != null">
+        updated = #{record.updated,jdbcType=VARCHAR},
+      </if>
+      <if test="record.editorValue != null">
+        editor_value = #{record.editorValue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update jtb_itemcontent
+    set id = #{record.id,jdbcType=INTEGER},
+      simple_content = #{record.simpleContent,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      created = #{record.created,jdbcType=VARCHAR},
+      updated = #{record.updated,jdbcType=VARCHAR},
+      editor_value = #{record.editorValue,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update jtb_itemcontent
+    set id = #{record.id,jdbcType=INTEGER},
+      simple_content = #{record.simpleContent,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      created = #{record.created,jdbcType=VARCHAR},
+      updated = #{record.updated,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jtmall.entity.JtbItemcontent">
+    update jtb_itemcontent
+    <set>
+      <if test="simpleContent != null">
+        simple_content = #{simpleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=VARCHAR},
+      </if>
+      <if test="updated != null">
+        updated = #{updated,jdbcType=VARCHAR},
+      </if>
+      <if test="editorValue != null">
+        editor_value = #{editorValue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jtmall.entity.JtbItemcontent">
+    update jtb_itemcontent
+    set simple_content = #{simpleContent,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      created = #{created,jdbcType=VARCHAR},
+      updated = #{updated,jdbcType=VARCHAR},
+      editor_value = #{editorValue,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jtmall.entity.JtbItemcontent">
+    update jtb_itemcontent
+    set simple_content = #{simpleContent,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      created = #{created,jdbcType=VARCHAR},
+      updated = #{updated,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--############################################ -->
+  <delete id="deleteAllJtItem" parameterType="int">
+    delete from jtb_itemcontent
+        where id in
+    <foreach item="item" collection="array" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+
+  </delete>
+</mapper>

@@ -21,5 +21,11 @@
     <name>jtmall-manager</name>
     <description>Demo project for Spring Boot</description>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.jtmall</groupId>
+            <artifactId>jtmall-commons</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
