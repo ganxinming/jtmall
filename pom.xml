@@ -22,6 +22,8 @@
         <module>jtmall-manager</module>
         <module>jtmall-manager-webapp</module>
         <module>jtmall-commons</module>
+        <module>jtmall-content-webapp</module>
+        <module>jtmall-content</module>
     </modules>
 
     <properties>

@@ -1,0 +1,38 @@
+## service调用版本
+demo:
+  service:
+    version: 1.0.1
+ ##dubbo配置
+dubbo:
+  application:
+    name: dubbo-consumer-content
+  consumer:
+    timeout: 600000
+  protocol:
+    name: dubbo
+    port: 20881
+  registry:
+    address: zookeeper://120.79.189.242:2181
+##fastDFS服务器地址
+image:
+  server:
+    url: http://120.79.189.242/
+
+server:
+  port: 9093
+
+spring:
+  application:
+    name: dubbo-content
+  devtools:
+    restart:
+      additional-paths: resources/**
+      enabled: true
+  ##这个数据库连接这要用于分页插件不报错，实际没啥用
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: root
+    url: jdbc:mysql://localhost:3306/jtmall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+    username: root
+  thymeleaf:
+    cache: false

@@ -1,0 +1,20 @@
+package com.jtmall.contentweb;
+
+import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * JtmallContentWebApplication
+ * 消费者启动类
+ * @author xiaoze
+ * @date 2018/6/7
+ */
+@EnableDubbo
+@SpringBootApplication
+public class JtmallContentWebApplication {
+    public static void main(String[] args) {
+
+        SpringApplication.run(JtmallContentWebApplication.class, args);
+    }
+}
