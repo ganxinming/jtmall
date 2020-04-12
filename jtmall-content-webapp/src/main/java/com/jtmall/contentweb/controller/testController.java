@@ -1,7 +1,7 @@
 package com.jtmall.contentweb.controller;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.jtmall.contentInterface.UserService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class testController {
 
-    @Reference(version = "${demo.service.version}")
+    @Reference(version = "${demo.service.content}",check = false)
     private UserService userService;
 
     @RequestMapping("hello")
@@ -24,5 +24,4 @@ public class testController {
     public String hello(){
             return  userService.testRedis();
     }
-
 }

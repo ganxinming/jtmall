@@ -1,9 +1,9 @@
 package com.jtmall.manager.controller;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.jtmall.commons.utils.JsonUtils;
 import com.jtmall.commons.utils.Validators;
 import com.jtmall.service.RedisService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ import java.util.Map;
 public class getValueController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Reference(version = "${demo.service.version}")
+    @Reference(version = "${demo.service.manager}")
     private RedisService redisUtils;
 
     /**

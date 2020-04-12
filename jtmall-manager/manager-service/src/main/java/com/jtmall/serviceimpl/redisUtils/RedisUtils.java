@@ -1,7 +1,7 @@
 package com.jtmall.serviceimpl.redisUtils;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.jtmall.service.RedisService;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
 
@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * @Tutorials
  * @Opinion
  */
-@Service(version = "${demo.service.version}")
+@Service(version = "${demo.service.manager}")
 public class RedisUtils implements RedisService {
     @Autowired
     private RedisTemplate redisTemplate;

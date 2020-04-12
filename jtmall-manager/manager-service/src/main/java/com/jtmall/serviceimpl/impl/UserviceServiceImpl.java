@@ -1,9 +1,9 @@
 package com.jtmall.serviceimpl.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.jtmall.service.UserService;
 import com.jtmall.serviceimpl.mapper.JtbItemMapper;
 import com.jtmall.serviceimpl.mapper.JtbItemcontentMapper;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Tutorials
  * @Opinion
  */
-@Service(version = "${demo.service.version}")
+@Service(version = "${demo.service.manager}")
 public class UserviceServiceImpl  implements UserService {
 
     @Autowired

@@ -1,6 +1,6 @@
 demo:
   service:
-    version: 1.0.0
+    manager: 1.0.0
 
 dubbo:
   application:
@@ -12,6 +12,19 @@ dubbo:
     timeout: 600000
   registry:
     address: zookeeper://120.79.189.242:2181
+    check: false
+  scan:
+    base-packages: com.jtmall
+#dubbo:
+#  application:
+#    name: sea-provider-log
+#  registry:
+#    address: zookeeper://120.79.189.242:2181
+#  protocol:
+#    name: dubbo
+#    port: 20552
+#  scan:
+#    base-packages: com.jtmall
 
 mybatis:
   mapperLocations: classpath:mapper/*.xml

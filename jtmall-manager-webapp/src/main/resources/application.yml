@@ -1,18 +1,21 @@
 ## service调用版本
 demo:
   service:
-    version: 1.0.0
- ##dubbo配置
+    manager: 1.0.0
+  ##dubbo配置
 dubbo:
   application:
     name: dubbo-consumer
   consumer:
     timeout: 600000
+    check: false
   protocol:
     name: dubbo
-    port: 20880
   registry:
     address: zookeeper://120.79.189.242:2181
+    check: false
+  scan:
+    base-packages: com.jtmall
 ##fastDFS服务器地址
 image:
   server:

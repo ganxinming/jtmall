@@ -1,17 +1,31 @@
 demo:
   service:
-    version: 1.0.1
+    manager: 1.0.0
+    content: 1.0.1
 
 dubbo:
   application:
     name: dubbo-provider-content
   protocol:
     name: dubbo
-    port: 20881
+    port: 20882
   provider:
     timeout: 600000
   registry:
     address: zookeeper://120.79.189.242:2181
+    check: false
+  scan:
+    base-packages: com.jtmall
+#dubbo:
+#  application:
+#    name: sea-provider-message
+#  registry:
+#    address: zookeeper://120.79.189.242:2181
+#  protocol:
+#    name: dubbo
+#    port: 20553
+#  scan:
+#    base-packages: com.jtmall
 
 mybatis:
   mapperLocations: classpath:mapper/*.xml
@@ -31,7 +45,7 @@ server:
 
 spring:
   application:
-    name: dubbo-provider
+    name: dubbo-provider-content
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: root

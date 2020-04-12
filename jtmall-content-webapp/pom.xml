@@ -32,17 +32,21 @@
             <artifactId>jtmall-commons</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
-        <!--mysql这个数据库驱动这要用于分页插件不报错，实际没啥用-->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
+            <groupId>com.jtmall</groupId>
+            <artifactId>content-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.jtmall</groupId>
-            <artifactId>content-interface</artifactId>
+            <artifactId>manager-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jtmall</groupId>
+            <artifactId>jtmall-web-util</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

@@ -1,15 +1,15 @@
 package com.jtmall.serviceimpl.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.jtmall.entity.*;
 import com.jtmall.commons.utils.LocalDateUtils;
+import com.jtmall.entity.*;
 import com.jtmall.service.JtbItemService;
 import com.jtmall.service.RedisService;
 import com.jtmall.serviceimpl.mapper.JtbItemAndContentMapper;
 import com.jtmall.serviceimpl.mapper.JtbItemMapper;
 import com.jtmall.serviceimpl.mapper.JtbItemcontentMapper;
+import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ import java.util.List;
  * @Tutorials
  * @Opinion
  */
-@Service(version = "${demo.service.version}")
+@Service(version = "${demo.service.manager}")
 public class JtbItemServiceImpl implements JtbItemService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -108,6 +108,7 @@ public class JtbItemServiceImpl implements JtbItemService {
 
         return jtbItemAndContentMapper.getJtbItemAndContentByid(id);
     }
+
     @Transactional(rollbackFor=Exception.class)
     @Override
     public void updateJtbItemAndContent(JtbItem jtbItem, JtbItemcontent jtbItemcontent) {

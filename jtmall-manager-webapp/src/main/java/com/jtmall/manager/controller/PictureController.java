@@ -1,9 +1,9 @@
 package com.jtmall.manager.controller;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.jtmall.commons.utils.FastDFSClient;
 import com.jtmall.commons.utils.JsonUtils;
 import com.jtmall.service.RedisService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,7 +35,7 @@ public class PictureController {
 	@Value("${image.server.url}")
 	private String IMAGE_SERVER_URL;
 
-	@Reference(version = "${demo.service.version}")
+	@Reference(version = "${demo.service.manager}")
 	private RedisService redisUtils;
 
 	//TODO:解决多图片上传线程竞争问题

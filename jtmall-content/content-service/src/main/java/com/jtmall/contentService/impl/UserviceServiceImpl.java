@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Tutorials
  * @Opinion
  */
-@Service(version = "${demo.service.version}")
+@Service(version = "${demo.service.content}")
 public class UserviceServiceImpl implements UserService {
 
     @Autowired

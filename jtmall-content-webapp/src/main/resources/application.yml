@@ -1,18 +1,38 @@
 ## service调用版本
 demo:
   service:
-    version: 1.0.1
+    manager: 1.0.0
+    content: 1.0.1
  ##dubbo配置
 dubbo:
   application:
     name: dubbo-consumer-content
   consumer:
     timeout: 600000
+    check: false
   protocol:
     name: dubbo
-    port: 20881
   registry:
     address: zookeeper://120.79.189.242:2181
+    check: false
+  scan:
+    base-packages: com.jtmall
+
+#dubbo:
+#  application:
+#    name: sea-consumer-web
+#  registry:
+#    address: zookeeper://120.79.189.242:2181
+#    check: false
+#  protocol:
+#    name: dubbo
+#    port: 20551
+#  scan:
+#    base-packages: com.jtmall
+#  consumer:
+#    timeout: 5000
+#    check: false
+
 ##fastDFS服务器地址
 image:
   server:
@@ -23,7 +43,7 @@ server:
 
 spring:
   application:
-    name: dubbo-content
+    name: dubbo-consumer-content
   devtools:
     restart:
       additional-paths: resources/**

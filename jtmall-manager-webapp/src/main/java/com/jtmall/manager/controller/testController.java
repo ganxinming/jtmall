@@ -1,8 +1,8 @@
 package com.jtmall.manager.controller;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.jtmall.service.RedisService;
 import com.jtmall.service.UserService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +20,10 @@ import java.util.concurrent.TimeUnit;
 @Controller
 public class testController {
 
-    @Reference(version = "${demo.service.version}")
+    @Reference(version = "${demo.service.manager}")
     private RedisService redisUtils;
 
-    @Reference(version = "${demo.service.version}")
+    @Reference(version = "${demo.service.manager}")
     private UserService userService;
 
     @RequestMapping(value = "/hello/{id}")

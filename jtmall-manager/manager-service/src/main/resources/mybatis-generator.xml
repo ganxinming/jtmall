@@ -47,10 +47,12 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
         <!-- 指定数据库表  多个表示,可用多个table标签-->
-        <table tableName="jtb_item">
+<!--        <table tableName="jtb_item">-->
             <!-- 指定是否只生成domain类，如果设置为true，只生成domain类，如果还配置了sqlMapGenerator，那么在mapper XML文件中，只生成resultMap元素 -->
 <!--            <property name="modelOnly" value="false"/>-->
-        </table>
-        <table tableName="jtb_itemcontent"></table>
+<!--        </table>-->
+<!--        <table tableName="jtb_itemcontent"></table>-->
+        <table tableName="ums_member"></table>
+
     </context>
 </generatorConfiguration>

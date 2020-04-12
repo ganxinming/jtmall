@@ -40,6 +40,16 @@ public class JtbItemAndcontent implements Serializable {
 
     private String simpleContent;
 
+    private String editorValue;
+
+    public String getEditorValue() {
+        return editorValue;
+    }
+
+    public void setEditorValue(String editorValue) {
+        this.editorValue = editorValue;
+    }
+
     private String image;
 
     private String created;

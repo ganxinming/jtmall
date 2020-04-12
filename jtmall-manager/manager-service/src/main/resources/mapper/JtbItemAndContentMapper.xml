@@ -17,6 +17,7 @@
         <result property="auditState" column="audit_state"></result>
         <result property="state" column="state"></result>
         <result property="simpleContent" column="simple_content"></result>
+        <result property="editorValue" column="editor_value"></result>
         <result property="image" column="image"></result>
         <result property="created" column="created"></result>
     </resultMap>

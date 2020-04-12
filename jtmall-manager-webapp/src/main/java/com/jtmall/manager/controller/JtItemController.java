@@ -1,12 +1,12 @@
 package com.jtmall.manager.controller;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.jtmall.commons.utils.JsonUtils;
 import com.jtmall.entity.JtbItem;
 import com.jtmall.entity.JtbItemAndcontent;
 import com.jtmall.entity.JtbItemcontent;
 import com.jtmall.service.JtbItemService;
 import com.jtmall.service.RedisService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -29,10 +29,10 @@ public class JtItemController {
 
     private Logger logger=LoggerFactory.getLogger(this.getClass());
 
-    @Reference(version = "${demo.service.version}")
+    @Reference(version = "${demo.service.manager}")
     private JtbItemService jtbItemService;
 
-    @Reference(version = "${demo.service.version}")
+    @Reference(version = "${demo.service.manager}")
     private RedisService redisUtils;
 
 
