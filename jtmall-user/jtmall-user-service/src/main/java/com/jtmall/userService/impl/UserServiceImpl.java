@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.jtmall.service.RedisService;
 import com.jtmall.userInterface.UserService;
 import com.jtmall.userPojo.UmsMember;
+import com.jtmall.userPojo.UmsMemberExample;
 import com.jtmall.userPojo.UmsMemberReceiveAddress;
 import com.jtmall.userService.mapper.UmsMemberMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,16 +42,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UmsMember login(UmsMember umsMember) {
-        System.out.println(redisUtil);
-        redisUtil.set("1",123456);
-        System.out.println(redisUtil.get("1"));
-//        String umsMemberStr = redisUtil.get("user:" + umsMember.getPassword()+umsMember.getUsername() + ":info").toString();
-//
-//        if (StringUtils.isNotBlank(umsMemberStr)) {
-//                    // 密码正确
-//            UmsMember umsMemberFromCache = JSON.parseObject(umsMemberStr, UmsMember.class);
-//            return umsMemberFromCache;
-//        }
+
+        String umsMemberStr = redisUtil.get("user:" + umsMember.getPassword()+umsMember.getUsername() + ":info").toString();
+
+        if (StringUtils.isNotBlank(umsMemberStr)) {
+                    // 密码正确
+            UmsMember umsMemberFromCache = JSON.parseObject(umsMemberStr, UmsMember.class);
+            return umsMemberFromCache;
+        }
             UmsMember umsMemberFromDb =loginFromDb(umsMember);
             if(umsMemberFromDb!=null){
                 redisUtil.set("user:" + umsMember.getPassword()+umsMember.getUsername() + ":info", JSON.toJSONString(umsMemberFromDb),24L, TimeUnit.HOURS);
@@ -73,17 +73,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public UmsMember checkOauthUser(UmsMember umsCheck) {
 //        UmsMember umsMember = userMapper.selectOne(umsCheck);
-        UmsMember umsMember = userMapper.selectByPrimaryKey(umsCheck.getId());
-        return umsMember;
+
+        UmsMemberExample example=new UmsMemberExample();
+        example.createCriteria().andSourceUidEqualTo(umsCheck.getSourceUid());
+        List<UmsMember> list=userMapper.selectByExample(example);
+        if (list == null || list.size() ==0){
+            return  null;
+        }
+        return list.get(0);
     }
 
     @Override
     public UmsMember getOauthUser(UmsMember umsMemberCheck) {
-
-
-//        UmsMember umsMember = userMapper.selectOne(umsMemberCheck);
-        UmsMember umsMember = userMapper.selectByPrimaryKey(umsMemberCheck.getId());
-        return umsMember;
+        UmsMemberExample example=new UmsMemberExample();
+        example.createCriteria().andSourceUidEqualTo(umsMemberCheck.getSourceUid());
+        List<UmsMember> list=userMapper.selectByExample(example);
+        if (list == null || list.size() ==0){
+            return  null;
+        }
+        return list.get(0);
     }
 
     @Override

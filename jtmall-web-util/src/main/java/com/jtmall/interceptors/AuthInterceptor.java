@@ -53,10 +53,11 @@ public class AuthInterceptor implements HandlerInterceptor {
             String ip = request.getHeader("x-forwarded-for");// 通过nginx转发的客户端ip
             if(StringUtils.isBlank(ip)){
                 ip = request.getRemoteAddr();// 从request中获取ip
-                if(StringUtils.isBlank(ip)){
+                if(StringUtils.isBlank(ip) || ip.equals("0:0:0:0:0:0:0:1")){
                     ip = "127.0.0.1";
                 }
             }
+
             /**
              * 为什么认证不用service？而是用controller，因为service调用只能在内部服务，而社交服务不能调用认证
              * 然后就可以通过httpclient来发送请求调用contrller，去认证token是否有效，有效则存入cookie刷新有效时间

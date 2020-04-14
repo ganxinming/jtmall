@@ -33,10 +33,10 @@ public class PassportController {
         // client_id=2173054083
         String s3 = "https://api.weibo.com/oauth2/access_token?";
         Map<String,String> paramMap = new HashMap<>();
-        paramMap.put("client_id","2173054083");
-        paramMap.put("client_secret","f043fe09dcab7e9b90cdd7491e282a8f");
+        paramMap.put("client_id","2977058238");
+        paramMap.put("client_secret","b96025234b0e6cccddde39a459d95b83");
         paramMap.put("grant_type","authorization_code");
-        paramMap.put("redirect_uri","http://passport.gmall.com:8085/vlogin");
+        paramMap.put("redirect_uri","http://127.0.0.1:9095/vlogin");
         paramMap.put("code",code);// 授权有效期内可以使用，没新生成一次授权码，说明用户对第三方数据进行重启授权，之前的access_token和授权码全部过期
         String access_token_json = HttpclientUtil.doPost(s3, paramMap);
 
@@ -54,7 +54,10 @@ public class PassportController {
         umsMember.setSourceType(2);
         umsMember.setAccessCode(code);
         umsMember.setAccessToken(access_token);
-        umsMember.setSourceUid((Integer) user_map.get("idstr"));
+
+        String s1=user_map.get("idstr").toString();
+        long sid=Long.parseLong(s1);
+        umsMember.setSourceUid((int)sid);
         umsMember.setCity((String)user_map.get("location"));
         umsMember.setNickname((String)user_map.get("screen_name"));
         String g = "0";
@@ -86,7 +89,7 @@ public class PassportController {
         String ip = request.getHeader("x-forwarded-for");// 通过nginx转发的客户端ip
         if(StringUtils.isBlank(ip)){
             ip = request.getRemoteAddr();// 从request中获取ip
-            if(StringUtils.isBlank(ip)){
+            if(StringUtils.isBlank(ip) || ip.equals("0:0:0:0:0:0:0:1")){
                 ip = "127.0.0.1";
             }
         }
@@ -98,7 +101,7 @@ public class PassportController {
         userService.addUserToken(token,memberId);
 
 
-        return "redirect:http://search.gmall.com:8083/index?token="+token;
+        return "redirect:http://localhost:9091/index?token="+token;
     }
 
 
@@ -110,7 +113,7 @@ public class PassportController {
         Map<String,String> map = new HashMap<>();
 
         Map<String, Object> decode = JwtUtil.decode(token, "2019gmall0105", currentIp);
-
+        //TODO 社交登录生成的token解不开
         if(decode!=null){
             map.put("status","success");
             System.out.println(decode.get("memberId").toString()+decode.get("nickname").toString());
@@ -148,10 +151,11 @@ public class PassportController {
             String ip = request.getHeader("x-forwarded-for");// 通过nginx转发的客户端ip
             if(StringUtils.isBlank(ip)){
                 ip = request.getRemoteAddr();// 从request中获取ip
-                if(StringUtils.isBlank(ip)){
+                if(StringUtils.isBlank(ip) || ip.equals("0:0:0:0:0:0:0:1")){
                     ip = "127.0.0.1";
                 }
             }
+
 
             // 按照设计的算法对参数进行加密后，生成token
             token = JwtUtil.encode("2019gmall0105", userMap, ip);
@@ -172,6 +176,11 @@ public class PassportController {
         if (ReturnUrl != null ){
             map.put("ReturnUrl",ReturnUrl);
         }
+        return "index";
+    }
+    //登出
+    @RequestMapping("vlogout")
+    public String vlogout(ModelMap map){
         return "index";
     }
 }
