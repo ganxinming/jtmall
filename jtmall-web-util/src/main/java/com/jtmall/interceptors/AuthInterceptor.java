@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,10 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        //解决对静态资源的拦截进行放行
+        if (handler instanceof ResourceHttpRequestHandler){
+            return true;
+        }
         // 拦截代码
         // 判断被拦截的请求的访问的方法的注解(是否时需要拦截的)
         HandlerMethod hm = (HandlerMethod) handler;
