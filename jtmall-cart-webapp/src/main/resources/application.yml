@@ -1,0 +1,59 @@
+## service调用版本
+demo:
+  service:
+    manager: 1.0.0
+    content: 1.0.1
+    cart: 1.0.4
+ ##dubbo配置
+dubbo:
+  application:
+    name: dubbo-consumer-cart
+  consumer:
+    timeout: 600000
+    check: false
+  protocol:
+    name: dubbo
+  registry:
+    address: zookeeper://120.79.189.242:2181
+    check: false
+  scan:
+    base-packages: com.jtmall
+
+#dubbo:
+#  application:
+#    name: sea-consumer-web
+#  registry:
+#    address: zookeeper://120.79.189.242:2181
+#    check: false
+#  protocol:
+#    name: dubbo
+#    port: 20551
+#  scan:
+#    base-packages: com.jtmall
+#  consumer:
+#    timeout: 5000
+#    check: false
+
+##fastDFS服务器地址
+image:
+  server:
+    url: http://120.79.189.242/
+
+server:
+  port: 9097
+
+spring:
+  application:
+    name: dubbo-consumer-cart
+  devtools:
+    restart:
+      additional-paths: resources/**
+      enabled: true
+  ##这个数据库连接这要用于分页插件不报错，实际没啥用
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: root
+    url: jdbc:mysql://localhost:3306/jtmall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+    username: root
+  thymeleaf:
+    cache: false

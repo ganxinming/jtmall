@@ -27,6 +27,8 @@
         <module>jtmall-web-util</module>
         <module>jtmall-password-webapp</module>
         <module>jtmall-user</module>
+        <module>jtmall-cart-webapp</module>
+        <module>jtmall-cart</module>
     </modules>
 
     <properties>

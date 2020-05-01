@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jtmall.cartService.mapper.JtbOrderItemMapper">
+  <resultMap id="BaseResultMap" type="com.jtmall.cartPojo.JtbOrderItem">
+    <id column="order_item_id" jdbcType="INTEGER" property="orderItemId" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="item_id" jdbcType="INTEGER" property="itemId" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="item_imgurl" jdbcType="VARCHAR" property="itemImgurl" />
+    <result column="item_price" jdbcType="REAL" property="itemPrice" />
+    <result column="item_count" jdbcType="INTEGER" property="itemCount" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    order_item_id, order_id, item_id, item_name, item_imgurl, item_price, item_count, 
+    create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.jtmall.cartPojo.JtbOrderItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jtb_order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jtb_order_item
+    where order_item_id = #{orderItemId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from jtb_order_item
+    where order_item_id = #{orderItemId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jtmall.cartPojo.JtbOrderItemExample">
+    delete from jtb_order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jtmall.cartPojo.JtbOrderItem">
+    insert into jtb_order_item (order_item_id, order_id, item_id, 
+      item_name, item_imgurl, item_price, 
+      item_count, create_time)
+    values (#{orderItemId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, 
+      #{itemName,jdbcType=VARCHAR}, #{itemImgurl,jdbcType=VARCHAR}, #{itemPrice,jdbcType=REAL}, 
+      #{itemCount,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jtmall.cartPojo.JtbOrderItem">
+    insert into jtb_order_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderItemId != null">
+        order_item_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="itemName != null">
+        item_name,
+      </if>
+      <if test="itemImgurl != null">
+        item_imgurl,
+      </if>
+      <if test="itemPrice != null">
+        item_price,
+      </if>
+      <if test="itemCount != null">
+        item_count,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderItemId != null">
+        #{orderItemId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null">
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemImgurl != null">
+        #{itemImgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="itemPrice != null">
+        #{itemPrice,jdbcType=REAL},
+      </if>
+      <if test="itemCount != null">
+        #{itemCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jtmall.cartPojo.JtbOrderItemExample" resultType="java.lang.Long">
+    select count(*) from jtb_order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update jtb_order_item
+    <set>
+      <if test="record.orderItemId != null">
+        order_item_id = #{record.orderItemId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.itemId != null">
+        item_id = #{record.itemId,jdbcType=INTEGER},
+      </if>
+      <if test="record.itemName != null">
+        item_name = #{record.itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemImgurl != null">
+        item_imgurl = #{record.itemImgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemPrice != null">
+        item_price = #{record.itemPrice,jdbcType=REAL},
+      </if>
+      <if test="record.itemCount != null">
+        item_count = #{record.itemCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update jtb_order_item
+    set order_item_id = #{record.orderItemId,jdbcType=INTEGER},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      item_id = #{record.itemId,jdbcType=INTEGER},
+      item_name = #{record.itemName,jdbcType=VARCHAR},
+      item_imgurl = #{record.itemImgurl,jdbcType=VARCHAR},
+      item_price = #{record.itemPrice,jdbcType=REAL},
+      item_count = #{record.itemCount,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jtmall.cartPojo.JtbOrderItem">
+    update jtb_order_item
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null">
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null">
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemImgurl != null">
+        item_imgurl = #{itemImgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="itemPrice != null">
+        item_price = #{itemPrice,jdbcType=REAL},
+      </if>
+      <if test="itemCount != null">
+        item_count = #{itemCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_item_id = #{orderItemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jtmall.cartPojo.JtbOrderItem">
+    update jtb_order_item
+    set order_id = #{orderId,jdbcType=INTEGER},
+      item_id = #{itemId,jdbcType=INTEGER},
+      item_name = #{itemName,jdbcType=VARCHAR},
+      item_imgurl = #{itemImgurl,jdbcType=VARCHAR},
+      item_price = #{itemPrice,jdbcType=REAL},
+      item_count = #{itemCount,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=VARCHAR}
+    where order_item_id = #{orderItemId,jdbcType=INTEGER}
+  </update>
+</mapper>
