@@ -1,7 +1,6 @@
 package com.jtmall.manager.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.jtmall.annotations.LoginRequired;
 import com.jtmall.commons.utils.Validators;
 import com.jtmall.entity.JtbItemAndcontent;
 import com.jtmall.service.JtbItemService;
@@ -11,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,8 +32,8 @@ public class PageController {
     @Reference(version = "${demo.service.manager}")
     private RedisService redisUtils;
 
-    @LoginRequired()
-    @CrossOrigin
+//    @LoginRequired()
+//    @CrossOrigin
     @RequestMapping("/index")
     public String inde(Model model) {
         logger.debug("访问主页");

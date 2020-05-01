@@ -5,6 +5,10 @@ import com.jtmall.commons.utils.HttpclientUtil;
 import com.jtmall.userInterface.UserService;
 import com.jtmall.userPojo.UmsMember;
 import com.jtmall.util.JwtUtil;
+import me.zhyd.oauth.config.AuthConfig;
+import me.zhyd.oauth.model.AuthCallback;
+import me.zhyd.oauth.request.AuthQqRequest;
+import me.zhyd.oauth.request.AuthRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
@@ -13,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -113,7 +119,7 @@ public class PassportController {
         Map<String,String> map = new HashMap<>();
 
         Map<String, Object> decode = JwtUtil.decode(token, "2019gmall0105", currentIp);
-        //TODO 社交登录生成的token解不开
+
         if(decode!=null){
             map.put("status","success");
             System.out.println(decode.get("memberId").toString()+decode.get("nickname").toString());
@@ -171,16 +177,44 @@ public class PassportController {
         return token;
     }
 
+//    @RequestMapping("index")
+//    public String index(String ReturnUrl, ModelMap map){
+//        if (ReturnUrl != null ){
+//            map.put("ReturnUrl",ReturnUrl);
+//        }
+//        return "index";
+//    }
+    //登出
+    @RequestMapping("vlogout")
+    public String vlogout(ModelMap map){
+        return "index";
+    }
+    //qq登录
+    @RequestMapping("/qqRender")
+    public void qqRender(HttpServletResponse response) throws IOException {
+        AuthRequest authRequest = getqqAuthRequest();
+        response.sendRedirect(authRequest.authorize("state"));
+    }
+
+    @RequestMapping("/qlogin")
+    public Object qlogin(AuthCallback code) {
+        AuthRequest authRequest = getqqAuthRequest();
+        return authRequest.login(code);
+    }
+
+    private AuthRequest getqqAuthRequest() {
+        return new AuthQqRequest(AuthConfig.builder()
+                .clientId("1110350977")
+                .clientSecret("tuPXHKzF7VQpy8lt")
+                .redirectUri("http://127.0.0.1:9095/qlogin")
+                .build());
+    }
+
     @RequestMapping("index")
     public String index(String ReturnUrl, ModelMap map){
         if (ReturnUrl != null ){
             map.put("ReturnUrl",ReturnUrl);
         }
-        return "index";
-    }
-    //登出
-    @RequestMapping("vlogout")
-    public String vlogout(ModelMap map){
-        return "index";
+        return "/mall/login";
     }
 }

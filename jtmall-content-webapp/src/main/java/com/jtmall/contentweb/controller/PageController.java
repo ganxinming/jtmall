@@ -32,4 +32,9 @@ public class PageController {
         model.addAttribute("newGoodses",list);
         return  "mall/index";
     }
+
+    @RequestMapping("register")
+    public String register(Model model){
+        return  "mall/register";
+    }
 }

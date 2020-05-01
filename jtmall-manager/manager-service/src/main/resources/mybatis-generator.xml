@@ -52,7 +52,6 @@
 <!--            <property name="modelOnly" value="false"/>-->
 <!--        </table>-->
 <!--        <table tableName="jtb_itemcontent"></table>-->
-        <table tableName="ums_member"></table>
 
     </context>
 </generatorConfiguration>
