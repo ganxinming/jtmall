@@ -138,7 +138,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.47</version>
+            <version>1.2.83</version>
         </dependency>
         <!--mysql这个数据库驱动这要用于分页插件不报错，实际没啥用-->
         <dependency>
